@@ -1,0 +1,25 @@
+name: Daily Weather Update
+
+on:
+  schedule:
+    # 每天 UTC 時間 0:00 發送
+    - cron: '0 0 * * *'
+
+jobs:
+  weather:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run weather bot
+        run: node weather.js
